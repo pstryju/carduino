@@ -1,4 +1,4 @@
-//#define DEBUG
+#define DEBUG
 
 #define R_OFF 36
 #define R_SRC 35
