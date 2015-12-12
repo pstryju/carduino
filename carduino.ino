@@ -20,6 +20,8 @@
 #define SOCKET_PIN 37
 #define KEY_STATUS 41
 #define RADIO_ENABLE_TIME 900000
+#define MILLISFORMINUTE 60000
+#define RADIO_ENABLE_TIME 15
 
 byte currentMode = 0;
 int leftRead, rightRead;
@@ -44,7 +46,6 @@ pinMode(T_ENABLE,OUTPUT);
 pinMode(T_PLUS,OUTPUT);
 pinMode(T_MINUS,OUTPUT);
 pinMode(T_RESUME,OUTPUT);
-pinMode(M_LED_RED,OUTPUT);
 pinMode(M_LED_BLUE,OUTPUT);
 pinMode(M_LED_GREEN,OUTPUT);
 pinMode(RADIO_PIN,OUTPUT);
@@ -180,7 +181,7 @@ void showDebugValues() {
   Serial.print(leftRead);
   Serial.print(" ");
   Serial.print(rightRead);
-  Serial.print(" ")'
+  Serial.print(" ");
   Serial.println(keyStatus);
 }
 
@@ -189,7 +190,7 @@ void checkRadioEnableLogic() {
   if(keyStatus == false && radioStatus == true && enabledManually == false) radioDisable();
   if(keyStatus == false && radioStatus == false && pressedButtonWindows()) radioEnableManually();
   if(keyStatus == false && radioStatus == true && pressedButtonWindows()) radioDisable();
-  if(keyStatus == false && radioStatus == true && (millis() - radioEnableTime) > RADIO_ENABLE_TIME) radioDisable();
+  if(keyStatus == false && radioStatus == true && (millis() - radioEnableTime) > (RADIO_ENABLE_TIME * MILLISFORMINUTE)) radioDisable();
 }
 
 
